@@ -1,11 +1,17 @@
 const Invoice = require("../models/invoice")
 
 function getInvoice(req, res) {
-    res.json(Invoice.find())
+    Invoice.find()
+        .then(r => res.json(r))
+        .catch(err => { throw (err) })
 }
 
-function createInvoive(req, res) {
-    res.send("<h1>Hello</h1>")
+function createInvoice(req, res) {
+    Invoice.create({ name: req.body.name })
+        .then(r => res.json(r))
+        .catch(err => { throw (err) })
 }
 
 module.exports.getInvoice = getInvoice
+
+module.exports.createInvoice = createInvoice
