@@ -11,5 +11,5 @@ const port = process.env.PORT || 3000
 const mongo_url = process.env.MONGO_URL
 
 mongoose.connect(mongo_url, {})
-    .then(app.listen(port, () => { console.log("Server running on port ", port); }))
+    .then(res => app.listen(port, () => { console.log("Server running on port ", port); }))
     .catch(err => console.log("Unable to connect to MongoDB: ", err))
