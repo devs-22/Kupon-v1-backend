@@ -56,9 +56,40 @@ const usersController = {
       } catch (err) {
         console.log(err);
       }
-    }
+    },
 
-    // login: asyn
+    login: async(req, res) => {
+        // our login logic goes here
+        try{
+            //Get user input
+            const {email, password} = req.body
+            //validate input
+            if(!(email && password )) {
+                return res.status(400).send("All input required")
+            }
+            //validate if user exists in database
+            const user = await User.findOne({email});
+    
+            if(user && (await bcrypt.compareSync(password, user.password))) {
+                //create token
+                const token = jwt.sign(
+                    { user_id: user._id, email },
+                    process.env.TOKEN_KEY,
+                    {
+                        expiresIn: "2h",
+                    }
+                );
+                // save user token
+                user.token = token;
+    
+                //user
+                return res.status(200).json(user);
+            }
+            res.status(400).send("Invalid credentials");
+        } catch (err) {
+            console.log(err);
+        }
+    }
 }
 
 module.exports = usersController
