@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 // const auth = require("./middleware/auth");
 const path = require('path'); 
 const bodyParser = require('body-parser');
-const cloudinary = require("../utils/cloudinary");
+const cloudinary = require("../../utils/cloudinary");
 
 // importing user context
 const User = require("../models/user");

@@ -7,13 +7,14 @@ function getInvoice(req, res) {
 }
 
 function createInvoice(req, res) {
-    if( req.body.name != ""){
-    Invoice.create({ name: req.body.name })
+    let {name, email, date, number, items} = req.body
+    if(name && email && date && number && items){
+    Invoice.create({ name, email, date, number, items })
         .then(r => res.json(r))
-        .catch(err => { throw (err) })
+        .catch(err => res.status(500).json({error: "Failed to create invoice"}))
     } else{
         res.status(500).json({
-            error: "Name cannot be blank"
+            error: "Please include all fields"
         })
     }
 }
