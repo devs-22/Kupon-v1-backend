@@ -1,5 +1,5 @@
 const express = require("express")
-var {getInvoice} = require("../controllers/invoice")
+const {getInvoice} = require("../controllers/invoice");
 
 
 const invoiceRouter = express.Router()
