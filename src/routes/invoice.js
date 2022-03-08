@@ -1,11 +1,11 @@
 const express = require("express")
-const {getInvoice} = require("../controllers/invoice");
+var {getInvoice, createInvoice} = require("../controllers/invoice")
 
 
 const invoiceRouter = express.Router()
 
 invoiceRouter.get("/", getInvoice)
 
-invoiceRouter.post("/", getInvoice)
+invoiceRouter.post("/", createInvoice)
 
 module.exports = invoiceRouter
